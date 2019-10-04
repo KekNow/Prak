@@ -4,15 +4,15 @@ class Graph:
     def __init__(self):  #Конструктор
         self.G = {}  # Словарь - граф
 
-        N = int(input("Число рёбер: "))  # Вводим количество рёбер
-        print("Рёбра (начало, конец, вес): ")
-        for i in range(N):
-            a0, b0, weight = map(int, input().split())  # Вводим 3 числа - ребро графа и вес, N штук
-            for a, b in (a0, b0), (b0, a0):
+        print("Введите рёбра графа (в формате [[a1,a2,weidth1],[b1,b2,weidth2],..]):")
+        ribs = eval(input())
+        for rib in ribs:
+            for a, b in (rib[0], rib[1]), (rib[1], rib[0]):
                 if a in self.G:
-                    self.G[a][b] = weight
+                    self.G[a][b] = rib[2]
                 else:
-                    self.G[a] = {b: weight}
+                    self.G[a] = {b: rib[2]}
+
         self.dist = {}  #Словарь - расстояние до каждой вершины
 
     def search(self, S, E, ans):
